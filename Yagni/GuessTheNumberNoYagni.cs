@@ -1,21 +1,23 @@
 using Yagni.Utils;
 
-namespace Yagni;
+namespace YagniExample;
 
 /*
-In this example, the YAGNI principle is being respected, this is because all the implemented functionalities
- are being used and are necessary for the program.
+To demonstrate that the Yagni principle is being broken, we can see that a functionality was implemented 
+for the game which is the attempt logs, which is a functionality that is not being used and is unnecessary.
 */
-public class GuessTheNumberYagni
+public class GuessTheNumberNoYagni
 {
     private static Random random = new Random();
     private int numberToGuess;
     private int attempts;
+    private Logs logs;
 
-    public GuessTheNumberYagni()
+    public GuessTheNumberNoYagni()
     {
         numberToGuess = random.Next(1, 100);
         attempts = 0;
+        logs = new Logs();
     }
 
     public void startGame()
@@ -29,6 +31,9 @@ public class GuessTheNumberYagni
             if (int.TryParse(input, out int guess))
             {
                 attempts++;
+
+                logs.addLog(attempts); // Innecessary functionality
+
                 if (isWon(guess))
                 {
                     Message.prinMessageVictoryGame(attempts);
